@@ -1,0 +1,176 @@
+$colour1: #f2f2f2;
+$colour2: #8197d6;
+$colour3: #ff434c;
+$shadow: grey;
+$big-radius: 30px;
+$small-radius: 5px;
+
+$grey1: #47495a;
+$grey2: #6b7c93;
+
+@mixin small-shadow(){
+    box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+}
+
+@mixin big-shadow(){
+    box-shadow: 0 4px 9px 0 rgba(23,28,33,.06)
+}
+
+@mixin disabled-button(){
+    background-color: $grey2;
+}
+
+body{
+    background-color: $colour1;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+}
+
+.list-item{
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.list-box{
+    @extend .box;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px;
+    padding: 50px;
+}
+
+.avatar{
+    border-radius: 50%;
+}
+
+button{
+    @extend .button;
+    &[disabled] {
+        @include disabled-button;
+    }
+}
+
+.link-button{
+    @extend .button;
+    &:not([href]) {
+        @include disabled-button;
+    }
+}
+
+.save-button-container{
+    margin-top: 20px;
+    margin-bottom: 80px;
+}
+
+.right-button-container{
+    width: 100%;
+    text-align: right;
+}
+
+.button{
+    text-decoration: none;
+    font-family: Montserrat, sans-serif;
+    text-transform: uppercase;
+    font-size: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+    border: none;
+    background-color: $colour3;
+    color: white;
+    border-radius: $small-radius;
+    @include small-shadow;
+
+    .disabled {
+        color: $grey1;
+    }
+}
+
+
+
+.link{
+    float: right;
+}
+
+
+h1, h2, h3, h4, h5, h6{
+    font-weight: 400;
+}
+
+h1{
+    font-size: 40px;
+    text-transform: uppercase;
+    color: $grey1;
+}
+
+label, h2{
+    display: block;
+    font-size: 24px;
+    margin-bottom: 0;
+    font-weight: 100;
+    color: $grey2;
+    margin-top: 20px;
+}
+
+p, span{
+    color: $grey2;
+}
+
+.page-text{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.screen-sized{
+    height: 100vh;
+    width: 100vw;
+}
+
+.flex-center-vertical{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.box{
+    @include big-shadow;
+    border-radius: $big-radius;
+    background-color: white;
+}
+
+.login-box{
+    @extend .box;
+    margin: auto;
+    width: 300px;
+    padding-top: 25px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+
+    button{
+        margin-top: 40px;
+    }
+
+    p{
+        height: 2em
+    }
+}
+
+input[type=text], input[type=password]{
+    font-size: 15px;
+    padding: 10px;
+    border-style:solid;
+    border-radius: $small-radius;
+    border-color: $grey2;
+    color: $grey1;
+    &:focus{
+        border-color: $colour3;
+    }
+    font-weight: 200;
+    outline: none;
+    width: 200px
+}
+

@@ -1,0 +1,9 @@
+node_modules
+env
+
+# These patterns mean ignore all of .idea except runConfigurations
+!.idea/
+.idea/*
+!.idea/runConfigurations/
+
+npm-debug.log
