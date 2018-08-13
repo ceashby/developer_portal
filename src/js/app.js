@@ -22,8 +22,6 @@ export class App extends React.Component {
         super(props)
         this.state = {
             accessToken: null
-            // accessToken:
-            //     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjEyMyIsImlhdCI6MTUzNDE3ODE3NiwiZXhwIjoxNTM0MjY0NTc2fQ.m-bUl5_NavnBHhJz3-wenMBlo5y2EQ301Uh-96foO-A"
         }
         this.logOutTimeout = null
     }

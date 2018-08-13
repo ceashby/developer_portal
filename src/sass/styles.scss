@@ -159,6 +159,14 @@ p, span{
     }
 }
 
+.full-width-input-container{
+    display: flex;
+
+    input{
+        flex-grow: 1;
+    }
+}
+
 input[type=text], input[type=password]{
     font-size: 15px;
     padding: 10px;

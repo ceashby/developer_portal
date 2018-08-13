@@ -53,19 +53,23 @@ export class LogIn extends React.Component {
                 <div className="login-box">
                     <h1>Log In</h1>
                     <label>Email</label>
-                    <input
-                        type="text"
-                        disabled={this.state.isBusy}
-                        value={this.state.email}
-                        onChange={event => this.setState({ email: event.target.value })}
-                    />
+                    <div className="full-width-input-container">
+                        <input
+                            type="text"
+                            disabled={this.state.isBusy}
+                            value={this.state.email}
+                            onChange={event => this.setState({ email: event.target.value })}
+                        />
+                    </div>
                     <label>Password</label>
-                    <input
-                        disabled={this.state.isBusy}
-                        type="password"
-                        value={this.state.password}
-                        onChange={event => this.setState({ password: event.target.value })}
-                    />
+                    <div className="full-width-input-container">
+                        <input
+                            disabled={this.state.isBusy}
+                            type="password"
+                            value={this.state.password}
+                            onChange={event => this.setState({ password: event.target.value })}
+                        />
+                    </div>
                     <div>
                         <button onClick={() => this.handleClick()}>Submit</button>
                     </div>

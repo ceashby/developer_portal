@@ -116,19 +116,27 @@ export class Edit extends React.Component {
                 <PseudoA href={getURLFromProps({ page: Pages.home })}>&lt; Home</PseudoA>
                 <h1>Edit App</h1>
                 <label>Name</label>
-                <input
-                    type="text"
-                    value={this.state.name}
-                    style={{ marginRight: "100%" }}
-                    onChange={event => this.setState({ name: event.target.value, isSaved: false })}
-                />
+                <div className="full-width-input-container">
+                    <input
+                        type="text"
+                        value={this.state.name}
+                        style={{ width: "100%" }}
+                        onChange={event =>
+                            this.setState({ name: event.target.value, isSaved: false })
+                        }
+                    />
+                </div>
                 <label>Logo</label>
-                <input
-                    type="text"
-                    value={this.state.logo}
-                    style={{ width: "100%" }}
-                    onChange={event => this.setState({ logo: event.target.value, isSaved: false })}
-                />
+                <div className="full-width-input-container">
+                    <input
+                        type="text"
+                        value={this.state.logo}
+                        style={{ width: "100%" }}
+                        onChange={event =>
+                            this.setState({ logo: event.target.value, isSaved: false })
+                        }
+                    />
+                </div>
                 <div className="save-button-container">
                     <button
                         disabled={this.state.isBusy || this.state.isSaved}
