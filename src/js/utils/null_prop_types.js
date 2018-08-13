@@ -8,7 +8,7 @@ export let RequiredNullPropTypes = {
 
 function nullOrPropType(typeName) {
     return function(props, propName, componentName) {
-        const propValue = props[propName] // the actual value of `email` prop
+        const propValue = props[propName]
         if (propValue === null) return
         if (typeof propValue === typeName) return
         return new Error(

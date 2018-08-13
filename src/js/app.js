@@ -44,12 +44,12 @@ export class App extends React.Component {
 
     handleLogIn(accessToken, expiryTimeMilli) {
         this.setState({ accessToken: accessToken })
-        history.replaceState(null, "", getURLFromProps({ page: Pages.home }))
-
         clearTimeout(this.logOutTimeout)
         this.logOutTimeout = setTimeout(() => {
             this.setState({ accessToken: null })
         }, expiryTimeMilli)
+
+        history.replaceState(null, "", getURLFromProps({ page: Pages.home }))
     }
 
     render() {
