@@ -2,7 +2,7 @@ import React from "react"
 import { getURLFromProps, Pages } from "js/url_mappings"
 import PropTypes from "prop-types"
 import { PseudoA } from "js/utils/components/pseudo_a_tag"
-import { getAppsForUser, getUsersForApp, updateApp } from "js/server_requests"
+import { getAppDetails, getAppsForUser, getUsersForApp, updateApp } from "js/server_requests"
 import * as R from "ramda"
 
 export class Edit extends React.Component {
@@ -48,8 +48,7 @@ export class Edit extends React.Component {
 
         this.updateDetailsPromise = cancellablePromise(async isCancelled => {
             this.setState({ name: "Loading", logo: "Loading", isBusy: true })
-            let apps = await getAppsForUser(this.props.accessToken)
-            let app = R.find(app => app.id === this.props.appID, apps)
+            let app = await getAppDetails(this.props.accessToken, this.props.appID)
 
             if (!isCancelled()) {
                 this.setState({ name: app.name, logo: app.logo, isSaved: true, isBusy: false })
@@ -68,7 +67,7 @@ export class Edit extends React.Component {
             let users = await getUsersForApp({
                 appID: this.props.appID,
                 accessToken: this.props.accessToken,
-                offset: this.props.userPage * 25
+                offset: this.props.userPage
             })
 
             if (!isCancelled()) {

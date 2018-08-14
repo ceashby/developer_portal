@@ -6,7 +6,8 @@ import { getAppsForUser } from "js/server_requests"
 
 export class Home extends React.Component {
     static propTypes = {
-        accessToken: PropTypes.string.isRequired
+        accessToken: PropTypes.string.isRequired,
+        onLogOutClick: PropTypes.func.isRequired
     }
 
     constructor(props) {
@@ -28,6 +29,7 @@ export class Home extends React.Component {
     render() {
         return (
             <div className="list-box">
+                <button onClick={this.props.onLogOutClick}>Log Out</button>
                 <h1>Apps</h1>
                 {this.state.apps.map(app => (
                     <div key={app.id} className="list-item">

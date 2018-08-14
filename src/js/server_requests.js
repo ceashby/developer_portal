@@ -1,6 +1,7 @@
 const HOST = "https://guarded-thicket-22918.herokuapp.com/"
 import axios from "axios"
 import ms from "ms"
+import * as R from "ramda"
 
 export async function getAccessToken(email, password, expiry) {
     let response = await axios({
@@ -19,13 +20,20 @@ export async function getAccessToken(email, password, expiry) {
 }
 
 export async function testAccessToken(accessToken) {
-    return await axios({
-        method: "post",
+    let response = await axios({
+        method: "get",
         headers: {
             Authorization: accessToken
         },
         url: HOST
     })
+
+    return response.data.token.exp * 1000
+}
+
+export async function getAppDetails(accessToken, appID) {
+    let apps = await getAppsForUser(accessToken)
+    return R.find(app => app.id === appID, apps)
 }
 
 export async function getAppsForUser(accessToken) {
@@ -54,13 +62,15 @@ export async function updateApp({ appID, accessToken, name, logo }) {
     })
 }
 
-export async function getUsersForApp({ appID, accessToken, offset = 0 }) {
+export async function getUsersForApp({ appID, accessToken, page = 0 }) {
+    const pageSize = 25
+
     let response = await axios({
         method: "get",
         headers: {
             Authorization: accessToken
         },
-        url: `${HOST}apps/${appID}/users/?offset=${offset}&limit=25`
+        url: `${HOST}apps/${appID}/users/?offset=${page * pageSize}&limit=${pageSize}`
     })
     return response.data.users
 }
