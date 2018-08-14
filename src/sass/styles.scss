@@ -20,29 +20,13 @@ $grey2: #6b7c93;
     background-color: $grey2;
 }
 
+
+// Defaults
+
 body{
     background-color: $colour1;
     font-family: Montserrat, sans-serif;
     font-weight: 400;
-}
-
-.list-item{
-    padding-top: 40px;
-    padding-bottom: 40px;
-}
-
-.list-box{
-    @extend .box;
-    margin-top: 100px;
-    margin-bottom: 100px;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 800px;
-    padding: 50px;
-}
-
-.avatar{
-    border-radius: 50%;
 }
 
 button{
@@ -51,50 +35,6 @@ button{
         @include disabled-button;
     }
 }
-
-.link-button{
-    @extend .button;
-    &:not([href]) {
-        @include disabled-button;
-    }
-}
-
-.save-button-container{
-    margin-top: 20px;
-    margin-bottom: 80px;
-}
-
-.right-button-container{
-    width: 100%;
-    text-align: right;
-}
-
-.button{
-    text-decoration: none;
-    font-family: Montserrat, sans-serif;
-    text-transform: uppercase;
-    font-size: 15px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 25px;
-    padding-right: 25px;
-    border: none;
-    background-color: $colour3;
-    color: white;
-    border-radius: $small-radius;
-    @include small-shadow;
-
-    .disabled {
-        color: $grey1;
-    }
-}
-
-
-
-.link{
-    float: right;
-}
-
 
 h1, h2, h3, h4, h5, h6{
     font-weight: 400;
@@ -119,20 +59,72 @@ p, span{
     color: $grey2;
 }
 
-.page-text{
-    margin-left: 10px;
-    margin-right: 10px;
+
+input[type=text], input[type=password]{
+    font-size: 15px;
+    padding: 10px;
+    border-style:solid;
+    border-radius: $small-radius;
+    border-color: $grey2;
+    color: $grey1;
+    &:focus{
+        border-color: $colour3;
+    }
+    font-weight: 200;
+    outline: none;
 }
 
-.screen-sized{
-    height: 100vh;
-    width: 100vw;
+
+// Shared
+
+.link-button{
+    @extend .button;
+    &:not([href]) {
+        @include disabled-button;
+    }
 }
 
-.flex-center-vertical{
+.button{
+    text-decoration: none;
+    font-family: Montserrat, sans-serif;
+    text-transform: uppercase;
+    font-size: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+    border: none;
+    background-color: $colour3;
+    color: white;
+    border-radius: $small-radius;
+    @include small-shadow;
+
+    .disabled {
+        color: $grey1;
+    }
+}
+
+.full-width-input-container{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+
+    input{
+        flex-grow: 1;
+    }
+}
+
+.list-item{
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.list-box{
+    @extend .box;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px;
+    padding: 50px;
 }
 
 .box{
@@ -141,10 +133,28 @@ p, span{
     background-color: white;
 }
 
+
+// Log In
+
+.screen-sized{
+    height: 100vh;
+    width: 100vw;
+}
+
+.flex-center-vertical{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    div{
+        flex-grow: 1;
+        align-self: center;
+    }
+}
+
 .login-box{
     @extend .box;
-    margin: auto;
-    width: 300px;
+    max-width: 350px;
     padding-top: 25px;
     padding-left: 50px;
     padding-right: 50px;
@@ -159,26 +169,26 @@ p, span{
     }
 }
 
-.full-width-input-container{
-    display: flex;
 
-    input{
-        flex-grow: 1;
-    }
+// Home
+
+.right-button-container{
+    width: 100%;
+    text-align: right;
 }
 
-input[type=text], input[type=password]{
-    font-size: 15px;
-    padding: 10px;
-    border-style:solid;
-    border-radius: $small-radius;
-    border-color: $grey2;
-    color: $grey1;
-    &:focus{
-        border-color: $colour3;
-    }
-    font-weight: 200;
-    outline: none;
-    width: 200px
+// Edit
+
+.avatar{
+    border-radius: 50%;
 }
 
+.save-button-container{
+    margin-top: 20px;
+    margin-bottom: 80px;
+}
+
+.page-text{
+    margin-left: 10px;
+    margin-right: 10px;
+}
