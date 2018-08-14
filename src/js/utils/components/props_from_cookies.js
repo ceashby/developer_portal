@@ -22,7 +22,7 @@ export function propsFromCookies(names) {
             }
 
             handleSetCookie(key, value, expires) {
-                Cookies.set(key, value, expires / (1000 * 60 * 60 * 24))
+                Cookies.set(key, value, { expires: expires / (1000 * 60 * 60 * 24) })
                 this.setState({
                     ...this.state,
                     [key]: value

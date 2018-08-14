@@ -67,7 +67,7 @@ export class App extends React.Component {
     }
 
     handleLogIn(accessToken, duration) {
-        this.props.setCookie("accessToken", accessToken)
+        this.props.setCookie("accessToken", accessToken, duration)
         this.setAccessTokenTimeout(duration)
         this.setState({ tokenWasValidated: true })
         history.replaceState(null, "", getURLFromProps({ page: Pages.home }))
