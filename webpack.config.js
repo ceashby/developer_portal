@@ -5,14 +5,10 @@ var path = require("path")
 module.exports = function(env) {
     env = env || {}
     let mode = env.mode || "development"
-    let sourcePath = path.join(__dirname, "src")
     let isDevelopment = env.mode === "development"
     return {
         resolve: {
-            modules: ["./node_modules", "./src"],
-            alias: {
-                settings: sourcePath + "/js/settings/" + mode
-            }
+            modules: ["./node_modules", "./src"]
         },
         devtool: "source-map",
         context: path.join(__dirname, "src"),
