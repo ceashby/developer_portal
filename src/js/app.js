@@ -1,14 +1,14 @@
-import React from "react"
-import { propsFromURL } from "js/utils/components/props_from_url"
-import { getPropsFromURL, Pages } from "js/url_mappings"
 import PropTypes from "prop-types"
-import { RequiredNullPropTypes } from "js/utils/null_prop_types"
-import { LogIn } from "js/pages/log_in"
+import React from "react"
 import { Edit } from "js/pages/edit"
-import { Home } from "js/pages/home"
+import { getPropsFromURL, Pages } from "js/url_mappings"
 import { getURLFromProps } from "js/url_mappings"
-import { testAccessToken } from "js/server_requests"
+import { Home } from "js/pages/home"
+import { LogIn } from "js/pages/log_in"
 import { propsFromCookies } from "js/utils/components/props_from_cookies"
+import { propsFromURL } from "js/utils/components/props_from_url"
+import { RequiredNullPropTypes } from "js/utils/null_prop_types"
+import { testAccessToken } from "js/server_requests"
 
 @propsFromURL(getPropsFromURL)
 @propsFromCookies(["accessToken"])
@@ -19,51 +19,50 @@ export class App extends React.Component {
         urlParseError: PropTypes.bool.isRequired,
         title: PropTypes.string.isRequired,
         userPage: PropTypes.number.isRequired,
-        accessToken: PropTypes.string.isRequired,
+        accessToken: PropTypes.string,
         setCookie: PropTypes.func.isRequired
     }
 
     constructor(props) {
         super(props)
         this.state = {
-            tokenWasValidated: false
+            isValidatingToken: true
         }
         this.logOutTimeout = null
     }
 
     async componentDidMount() {
+        if (this.props.accessToken) {
+            this.validateToken()
+        } else {
+            this.setState({ isValidatingToken: false })
+        }
+
         this.componentDidUpdate()
     }
 
-    componentDidUpdate(prevProps) {
-        if (!this.state.tokenWasValidated && this.props.accessToken) {
-            this.validateToken()
-        }
-
+    componentDidUpdate() {
         document.title = this.props.title
-        let redirect = getRedirect(
-            this.props.urlParseError,
-            !this.props.accessToken,
-            this.props.page
-        )
-        if (redirect) {
-            history.replaceState(null, "", redirect)
+
+        let redirectURL = getRedirectIfInvalid(this.props)
+        if (redirectURL) {
+            history.pushState(null, "", redirectURL)
         }
     }
 
     async validateToken() {
+        this.setState({ isValidatingToken: true })
         try {
             let expiryTime = await testAccessToken(this.props.accessToken)
             this.setAccessTokenTimeout(expiryTime - Date.now())
         } catch (error) {
-            if (error) {
-                this.props.setCookie("accessToken", "")
+            if (((error || {}).response || {}).status === 401) {
+                this.logOut()
             } else {
                 throw error
             }
         }
-
-        this.setState({ tokenWasValidated: true })
+        this.setState({ isValidatingToken: false })
     }
 
     handleLogIn(accessToken, duration) {
@@ -75,21 +74,22 @@ export class App extends React.Component {
 
     logOut() {
         this.props.setCookie("accessToken", "")
+        history.pushState(null, "", getURLFromProps({ page: Pages.logIn }))
     }
 
     setAccessTokenTimeout(duration) {
         clearTimeout(this.logOutTimeout)
         this.logOutTimeout = setTimeout(() => {
-            this.props.setCookie("accessToken", "")
+            this.logOut()
         }, duration)
     }
 
     render() {
-        if (this.props.accessToken && !this.state.tokenWasValidated) {
+        if (this.state.isValidatingToken) {
             return null
         }
 
-        if (getRedirect(this.props.urlParseError, !this.props.accessToken, this.props.page)) {
+        if (getRedirectIfInvalid(this.props)) {
             return null
         }
 
@@ -117,10 +117,10 @@ export class App extends React.Component {
     }
 }
 
-function getRedirect(urlParseError, noAccessToken, page) {
+function getRedirectIfInvalid({ urlParseError, accessToken, page }) {
     if (urlParseError) {
         return getURLFromProps({ page: Pages.home })
-    } else if (noAccessToken && page !== Pages.logIn) {
+    } else if (!accessToken && page !== Pages.logIn) {
         return getURLFromProps({ page: Pages.logIn })
     }
 }

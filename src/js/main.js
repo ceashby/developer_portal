@@ -34,4 +34,6 @@ Stop jumping around
 If app was bigger/more complex:
 Redux store
 Parsing/creating of url done by passing remainder of url to child page
+
+401 and 200 error codes are the wrong way around in the docs
 */

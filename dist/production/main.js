@@ -46691,29 +46691,29 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _dec, _dec2, _class, _class2, _temp;
 
-var _react = __webpack_require__("../node_modules/react/react.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _props_from_url = __webpack_require__("./js/utils/components/props_from_url.js");
-
-var _url_mappings = __webpack_require__("./js/url_mappings.js");
-
 var _propTypes = __webpack_require__("../node_modules/prop-types/index.js");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _null_prop_types = __webpack_require__("./js/utils/null_prop_types.js");
+var _react = __webpack_require__("../node_modules/react/react.js");
 
-var _log_in = __webpack_require__("./js/pages/log_in.js");
+var _react2 = _interopRequireDefault(_react);
 
 var _edit = __webpack_require__("./js/pages/edit.js");
 
+var _url_mappings = __webpack_require__("./js/url_mappings.js");
+
 var _home = __webpack_require__("./js/pages/home.js");
 
-var _server_requests = __webpack_require__("./js/server_requests.js");
+var _log_in = __webpack_require__("./js/pages/log_in.js");
 
 var _props_from_cookies = __webpack_require__("./js/utils/components/props_from_cookies.js");
+
+var _props_from_url = __webpack_require__("./js/utils/components/props_from_url.js");
+
+var _null_prop_types = __webpack_require__("./js/utils/null_prop_types.js");
+
+var _server_requests = __webpack_require__("./js/server_requests.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -46732,7 +46732,7 @@ var App = exports.App = (_dec = (0, _props_from_url.propsFromURL)(_url_mappings.
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
         _this.state = {
-            tokenWasValidated: false
+            isValidatingToken: true
         };
         _this.logOutTimeout = null;
         return _this;
@@ -46741,36 +46741,39 @@ var App = exports.App = (_dec = (0, _props_from_url.propsFromURL)(_url_mappings.
     _createClass(App, [{
         key: "componentDidMount",
         value: async function componentDidMount() {
+            if (this.props.accessToken) {
+                this.validateToken();
+            } else {
+                this.setState({ isValidatingToken: false });
+            }
+
             this.componentDidUpdate();
         }
     }, {
         key: "componentDidUpdate",
-        value: function componentDidUpdate(prevProps) {
-            if (!this.state.tokenWasValidated && this.props.accessToken) {
-                this.validateToken();
-            }
-
+        value: function componentDidUpdate() {
             document.title = this.props.title;
-            var redirect = getRedirect(this.props.urlParseError, !this.props.accessToken, this.props.page);
-            if (redirect) {
-                history.replaceState(null, "", redirect);
+
+            var redirectURL = getRedirectIfInvalid(this.props);
+            if (redirectURL) {
+                history.pushState(null, "", redirectURL);
             }
         }
     }, {
         key: "validateToken",
         value: async function validateToken() {
+            this.setState({ isValidatingToken: true });
             try {
                 var expiryTime = await (0, _server_requests.testAccessToken)(this.props.accessToken);
                 this.setAccessTokenTimeout(expiryTime - Date.now());
             } catch (error) {
-                if (error) {
-                    this.props.setCookie("accessToken", "");
+                if (((error || {}).response || {}).status === 401) {
+                    this.logOut();
                 } else {
                     throw error;
                 }
             }
-
-            this.setState({ tokenWasValidated: true });
+            this.setState({ isValidatingToken: false });
         }
     }, {
         key: "handleLogIn",
@@ -46784,6 +46787,7 @@ var App = exports.App = (_dec = (0, _props_from_url.propsFromURL)(_url_mappings.
         key: "logOut",
         value: function logOut() {
             this.props.setCookie("accessToken", "");
+            history.pushState(null, "", (0, _url_mappings.getURLFromProps)({ page: _url_mappings.Pages.logIn }));
         }
     }, {
         key: "setAccessTokenTimeout",
@@ -46792,7 +46796,7 @@ var App = exports.App = (_dec = (0, _props_from_url.propsFromURL)(_url_mappings.
 
             clearTimeout(this.logOutTimeout);
             this.logOutTimeout = setTimeout(function () {
-                _this2.props.setCookie("accessToken", "");
+                _this2.logOut();
             }, duration);
         }
     }, {
@@ -46800,11 +46804,11 @@ var App = exports.App = (_dec = (0, _props_from_url.propsFromURL)(_url_mappings.
         value: function render() {
             var _this3 = this;
 
-            if (this.props.accessToken && !this.state.tokenWasValidated) {
+            if (this.state.isValidatingToken) {
                 return null;
             }
 
-            if (getRedirect(this.props.urlParseError, !this.props.accessToken, this.props.page)) {
+            if (getRedirectIfInvalid(this.props)) {
                 return null;
             }
 
@@ -46837,15 +46841,19 @@ var App = exports.App = (_dec = (0, _props_from_url.propsFromURL)(_url_mappings.
     urlParseError: _propTypes2.default.bool.isRequired,
     title: _propTypes2.default.string.isRequired,
     userPage: _propTypes2.default.number.isRequired,
-    accessToken: _propTypes2.default.string.isRequired,
+    accessToken: _propTypes2.default.string,
     setCookie: _propTypes2.default.func.isRequired
 }, _temp)) || _class) || _class);
 
 
-function getRedirect(urlParseError, noAccessToken, page) {
+function getRedirectIfInvalid(_ref) {
+    var urlParseError = _ref.urlParseError,
+        accessToken = _ref.accessToken,
+        page = _ref.page;
+
     if (urlParseError) {
         return (0, _url_mappings.getURLFromProps)({ page: _url_mappings.Pages.home });
-    } else if (noAccessToken && page !== _url_mappings.Pages.logIn) {
+    } else if (!accessToken && page !== _url_mappings.Pages.logIn) {
         return (0, _url_mappings.getURLFromProps)({ page: _url_mappings.Pages.logIn });
     }
 }
@@ -46902,6 +46910,8 @@ Stop jumping around
 If app was bigger/more complex:
 Redux store
 Parsing/creating of url done by passing remainder of url to child page
+
+401 and 200 error codes are the wrong way around in the docs
 */
 
 /***/ }),
