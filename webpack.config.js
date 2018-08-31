@@ -16,7 +16,8 @@ module.exports = function(env) {
             main: ["babel-polyfill", "./js/main.js"]
         },
         output: {
-            filename: isDevelopment ? "src/html/[name].js" : `dist/${mode}/[name].js`
+            filename: isDevelopment ? "src/html/[name].js" : `dist/${mode}/[name].js`,
+            publicPath: "/"
         },
 
         module: {

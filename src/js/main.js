@@ -1,7 +1,6 @@
 import { App } from "js/app.js"
 import ReactDOM from "react-dom"
 import React from "react"
-
 import "sass/styles.scss"
 
 function render() {
@@ -11,7 +10,7 @@ function render() {
 render()
 
 if (module.hot) {
-    module.hot.accept(["./app.js"], function() {
+    module.hot.accept(["js/app.js"], function() {
         console.clear()
         render()
     })
