@@ -67,7 +67,7 @@ export class Edit extends React.Component {
             let users = await getUsersForApp({
                 appID: this.props.appID,
                 accessToken: this.props.accessToken,
-                offset: this.props.userPage
+                page: this.props.userPage
             })
 
             if (!isCancelled()) {
@@ -119,7 +119,6 @@ export class Edit extends React.Component {
                     <input
                         type="text"
                         value={this.state.name}
-                        style={{ width: "100%" }}
                         onChange={event =>
                             this.setState({ name: event.target.value, isSaved: false })
                         }
@@ -130,7 +129,6 @@ export class Edit extends React.Component {
                     <input
                         type="text"
                         value={this.state.logo}
-                        style={{ width: "100%" }}
                         onChange={event =>
                             this.setState({ logo: event.target.value, isSaved: false })
                         }
