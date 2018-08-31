@@ -57,7 +57,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 0);
@@ -10167,7 +10167,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, "body {\n  background-color: #f2f2f2;\n  font-family: Montserrat, sans-serif;\n  font-weight: 400; }\n\nbutton[disabled] {\n  background-color: #6b7c93; }\n\nh1, h2, h3, h4, h5, h6 {\n  font-weight: 400; }\n\nh1 {\n  font-size: 40px;\n  text-transform: uppercase;\n  color: #47495a; }\n\nlabel, h2 {\n  display: block;\n  font-size: 24px;\n  margin-bottom: 0;\n  font-weight: 100;\n  color: #6b7c93;\n  margin-top: 20px; }\n\np, span {\n  color: #6b7c93; }\n\ninput[type=text], input[type=password] {\n  font-size: 15px;\n  padding: 10px;\n  border-style: solid;\n  border-radius: 5px;\n  border-color: #6b7c93;\n  color: #47495a;\n  font-weight: 200;\n  outline: none; }\n  input[type=text]:focus, input[type=password]:focus {\n    border-color: #ff434c; }\n\n.link-button:not([href]) {\n  background-color: #6b7c93; }\n\n.button, button, .link-button {\n  text-decoration: none;\n  font-family: Montserrat, sans-serif;\n  text-transform: uppercase;\n  font-size: 15px;\n  padding-top: 15px;\n  padding-bottom: 15px;\n  padding-left: 25px;\n  padding-right: 25px;\n  border: none;\n  background-color: #ff434c;\n  color: white;\n  border-radius: 5px;\n  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08); }\n  .button .disabled, button .disabled, .link-button .disabled {\n    color: #47495a; }\n\n.full-width-input-container {\n  display: flex; }\n  .full-width-input-container input {\n    flex-grow: 1; }\n\n.list-item {\n  padding-top: 40px;\n  padding-bottom: 40px; }\n\n.list-box {\n  margin-top: 100px;\n  margin-bottom: 100px;\n  margin-left: auto;\n  margin-right: auto;\n  max-width: 400px;\n  padding: 50px; }\n\n.box, .list-box, .login-box {\n  box-shadow: 0 4px 9px 0 rgba(23, 28, 33, 0.06);\n  border-radius: 30px;\n  background-color: white; }\n\n.screen-sized {\n  height: 100vh;\n  width: 100vw; }\n\n.flex-center-vertical {\n  display: flex;\n  flex-direction: row;\n  justify-content: center; }\n  .flex-center-vertical div {\n    flex-grow: 1;\n    align-self: center; }\n\n.login-box {\n  max-width: 350px;\n  padding-top: 25px;\n  padding-left: 50px;\n  padding-right: 50px;\n  padding-bottom: 50px; }\n  .login-box button {\n    margin-top: 40px; }\n  .login-box p {\n    height: 2em; }\n\n.right-button-container {\n  width: 100%;\n  text-align: right; }\n\n.avatar {\n  border-radius: 50%; }\n\n.save-button-container {\n  margin-top: 20px;\n  margin-bottom: 80px; }\n\n.page-text {\n  margin-left: 10px;\n  margin-right: 10px; }\n", ""]);
+exports.push([module.i, "body {\n  background-color: #f2f2f2;\n  font-family: Montserrat, sans-serif;\n  font-weight: 400; }\n\nbutton[disabled] {\n  background-color: #6b7c93; }\n\nh1, h2, h3, h4, h5, h6 {\n  font-weight: 400; }\n\nh1 {\n  font-size: 40px;\n  text-transform: uppercase;\n  color: #47495a; }\n\nlabel, h2 {\n  display: block;\n  font-size: 24px;\n  margin-bottom: 0;\n  font-weight: 100;\n  color: #6b7c93;\n  margin-top: 20px; }\n\np, span {\n  color: #6b7c93; }\n\ninput[type=text], input[type=password] {\n  font-size: 15px;\n  padding: 10px;\n  border-style: solid;\n  border-radius: 5px;\n  border-color: #6b7c93;\n  color: #47495a;\n  font-weight: 200;\n  outline: none; }\n  input[type=text]:focus, input[type=password]:focus {\n    border-color: #ff434c; }\n\n.link-button:not([href]) {\n  background-color: #6b7c93; }\n\n.button, button, .link-button {\n  text-decoration: none;\n  font-family: Montserrat, sans-serif;\n  text-transform: uppercase;\n  font-size: 15px;\n  padding-top: 15px;\n  padding-bottom: 15px;\n  padding-left: 25px;\n  padding-right: 25px;\n  border: none;\n  background-color: #ff434c;\n  color: white;\n  border-radius: 5px;\n  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08); }\n  .button .disabled, button .disabled, .link-button .disabled {\n    color: #47495a; }\n\n.full-width-input-container {\n  width: 100%;\n  display: flex; }\n  .full-width-input-container input {\n    flex-grow: 1; }\n\n.list-item {\n  padding-top: 40px;\n  padding-bottom: 40px; }\n\n.list-box {\n  margin-top: 100px;\n  margin-bottom: 100px;\n  margin-left: auto;\n  margin-right: auto;\n  max-width: 400px;\n  padding: 50px; }\n\n.box, .list-box, .login-box {\n  box-shadow: 0 4px 9px 0 rgba(23, 28, 33, 0.06);\n  border-radius: 30px;\n  background-color: white; }\n\n.screen-sized {\n  height: 100vh;\n  width: 100vw; }\n\n.flex-center-vertical {\n  display: flex;\n  flex-direction: row;\n  justify-content: center; }\n  .flex-center-vertical div {\n    flex-grow: 1;\n    align-self: center; }\n\n.login-box {\n  max-width: 350px;\n  padding-top: 25px;\n  padding-left: 50px;\n  padding-right: 50px;\n  padding-bottom: 50px; }\n  .login-box button {\n    margin-top: 40px; }\n  .login-box p {\n    height: 2em; }\n\n.right-button-container {\n  width: 100%;\n  text-align: right; }\n\n.avatar {\n  border-radius: 50%; }\n\n.save-button-container {\n  margin-top: 20px;\n  margin-bottom: 80px; }\n\n.page-text {\n  margin-left: 10px;\n  margin-right: 10px; }\n", ""]);
 
 // exports
 
@@ -46887,7 +46887,7 @@ function render() {
 render();
 
 if (false) {
-    module.hot.accept(["./app.js"], function () {
+    module.hot.accept(["js/app.js"], function () {
         console.clear();
         render();
     });
@@ -47030,7 +47030,7 @@ var Edit = exports.Edit = (_temp = _class = function (_React$Component) {
                 var users = await (0, _server_requests.getUsersForApp)({
                     appID: _this3.props.appID,
                     accessToken: _this3.props.accessToken,
-                    offset: _this3.props.userPage
+                    page: _this3.props.userPage
                 });
 
                 if (!isCancelled()) {
@@ -47101,7 +47101,6 @@ var Edit = exports.Edit = (_temp = _class = function (_React$Component) {
                     _react2.default.createElement("input", {
                         type: "text",
                         value: this.state.name,
-                        style: { width: "100%" },
                         onChange: function onChange(event) {
                             return _this4.setState({ name: event.target.value, isSaved: false });
                         }
@@ -47118,7 +47117,6 @@ var Edit = exports.Edit = (_temp = _class = function (_React$Component) {
                     _react2.default.createElement("input", {
                         type: "text",
                         value: this.state.logo,
-                        style: { width: "100%" },
                         onChange: function onChange(event) {
                             return _this4.setState({ logo: event.target.value, isSaved: false });
                         }
